@@ -111,6 +111,13 @@ function gameOver() {
     $("body").css("background-color","red");
     $("h1").text("Game Over! Press Any Key to Restart");
     $("h1").fadeIn();
+    $(document).one("click keydown", function(event) { // add click and keydown event listeners to document
+      if (event.type === "click" || event.which !== 0) { // check if event is a click or a keydown event with a non-zero key code
+        $(document).off("click keydown");
+        reset();
+        game();
+      }
+    });
   },400)
 
   $(".btn").off("click"); //removes click event listener
@@ -125,11 +132,7 @@ function reset() {
   gameInProgress = false;
 }
 
-
-//  MAIN MAIN MAIN MAIN ======================================================:)
-
-
-$("body").keypress(function() {
+function game(){
   $("body").css("background-color","#011F3F");
   gameInProgress = true;
   nextSequence();
@@ -151,7 +154,22 @@ $("body").keypress(function() {
     checkAnswer();
 
   })
+}
 
+
+//  MAIN MAIN MAIN MAIN ======================================================:)
+
+
+$("body").keypress(function() {
+  $("body").off("keypress");
+  $("body").off("click");
+  game();
+});
+
+$("body").click(function() {
+  $("body").off("click");
+  $("body").off("keypress");
+  game();
 });
 
 
