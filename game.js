@@ -1,4 +1,5 @@
 const COLORS = ["red","yellow","green","blue"];
+const WRONG = new Audio("sounds/wrong.mp3");
 var userClickedPattern =[];
 var gamePattern = [];
 var level=0;
@@ -6,10 +7,8 @@ var status;
 var clicks;
 var gameInProgress = false;
 
-const WRONG = new Audio("sounds/wrong.mp3");
 //=======================================================================
 
-//             gen
 
 function ranColor() {
   var n = Math.floor(Math.random()*4);
@@ -29,30 +28,8 @@ function playSound(color) {
   aud.play();
 }
 
-// function animatePress(color) {
-//   $("."+color+"").classList.add("pressed");
-//   setTimeout(function() {$("."+color+"").classList.remove("pressed");  },300)
-// }
-
 //================================================================================
 
-
-// function chkClick(level) {
-//   var userClickedPattern =[];             //chks what user click ;D and then adds clicked color to list smh ;d
-//   $(".btn").click(function() {
-//
-//     playSound(this.id);
-//     flashColor(this.id);
-//     // animatePress(this.id);
-//     for(i=0;i<level;i++){
-//       console.log("user clicked "+this.id);
-//       userClickedPattern.push(this.id);
-//       console.log("user click list: "+userClickedPattern);
-//     }
-//
-//   });
-
-// }
 
 function checkAnswer(){
   clicks+=1;
@@ -81,7 +58,7 @@ function checkAnswer(){
 
 
 //========================================================
-
+//cryaboutit
 //game start, next level etc...
 
 function nextSequence() {
@@ -92,7 +69,7 @@ function nextSequence() {
   clicks=0;
   $("h1").fadeOut();
   setTimeout(function() {
-    $("h1").text("Level : "+level);
+    $("h1").text("LeveL: "+level);
     $("h1").fadeIn();
   },400)
 
@@ -138,6 +115,7 @@ function game(){
   nextSequence();
 
   $(".btn").click(function() {
+    event.preventDefault;
     if (!gameInProgress) {
       return;
     }
